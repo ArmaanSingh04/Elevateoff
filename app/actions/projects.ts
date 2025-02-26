@@ -41,3 +41,17 @@ export async function handleUploadProject(
 
     return entry
 }
+
+export async function handleGetMyProjects(){
+    const session = await getServerSession(NEXT_AUTH)
+
+    if(session == null) return
+
+    const myprojects = await client.projects.findMany({
+        where:{
+            userId: Number(session.user.id)
+        }
+    })
+
+    return myprojects
+}

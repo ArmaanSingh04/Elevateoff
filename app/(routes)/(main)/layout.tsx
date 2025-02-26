@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 export default function ProtectedRoutes ({ children }: { children: React.ReactNode }) {
     const session = useSession()
 
+    console.log(session.status)
     if(session.status == "unauthenticated"){
         redirect('/')
     }
