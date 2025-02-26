@@ -7,6 +7,9 @@ export async function handleGetAllProjects(){
     return await client.projects.findMany({
         include:{
             tags: true
+        },
+        orderBy:{
+            bumps: 'desc'
         }
     })
 }
@@ -15,8 +18,9 @@ export async function handleUploadProject(
     name: string,
     description: string,
     contributable: boolean,
+    projectLink: string,
     tags: { id: number , name: string }[],
-    link?: string
+    contributionLink?: string
 ){
     const session = await getServerSession(NEXT_AUTH)
     if(session == null) return 
@@ -27,7 +31,8 @@ export async function handleUploadProject(
             name,
             description,
             contributable,
-            link,
+            contributionLink,
+            projectLink,
             user: {
                 connect:{
                     id: Number(session.user.id)
@@ -54,4 +59,18 @@ export async function handleGetMyProjects(){
     })
 
     return myprojects
+}
+
+export async function handleBump(id: number) {
+    await client.projects.update({
+        where:{
+            id
+        },
+        data:{
+            bumps: {
+                increment: 1
+            },
+            lastBumped: new Date()
+        }
+    })
 }

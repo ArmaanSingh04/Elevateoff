@@ -15,17 +15,22 @@ model User {
 }
 
 model Projects {
-  id              Int         @id @default(autoincrement())
-  name            String      
-  description     String       
-  contributable   Boolean     @default(false)
-  link            String?     
-  bumps           Int         @default(0)
+  id               Int          @id @default(autoincrement())
+  name             String      
+  description      String       
+  contributable    Boolean      @default(false)
+  contributionLink String?     
+  projectLink      String       @default("")
+  bumps            Int          @default(0)
+  lastBumped       DateTime     @default(now())
 
-  user            User        @relation(fields: [userId], references: [id])
+  user            User          @relation(fields: [userId], references: [id])
   userId          Int
 
   tags            Tags[]
+
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt @default(now())
 }
 
 model Tags {
