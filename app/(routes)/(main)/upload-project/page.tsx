@@ -55,7 +55,6 @@ const UploadProject = () => {
             }
             return prev;
         });
-        console.log(selectedTags)
     }
     async function getalltags() {
         const response = await handleGetAllTags()
@@ -75,7 +74,6 @@ const UploadProject = () => {
     }
 
     const handleFinalSubmit = async () => {
-        console.log(name, description, checkBox, projectLink, contributionLink, selectedTags)
         toast.success("Project added successfully !")
         await handleUploadProject(name, description, checkBox, projectLink, selectedTags, contributionLink)
         redirect('/my-projects')

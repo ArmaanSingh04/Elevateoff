@@ -90,3 +90,5 @@ export default async function Dashboard() {
 
     )
 }
+
+export const revalidate = 60
