@@ -2,6 +2,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import client from "@/db"
 import { Session } from "next-auth"
 import { JWT } from "next-auth/jwt"
+import bcrypt from "bcryptjs"
 
 export const NEXT_AUTH = {
     providers: [
@@ -22,7 +23,8 @@ export const NEXT_AUTH = {
 
                 // check the pasword
                 if(user){
-                    if(user.password == credentials.password){
+                    const isMatch = await bcrypt.compare(credentials.password , user.password)
+                    if(isMatch){
                         return {
                             id: String(user.id),
                             email: user.email
