@@ -25,3 +25,14 @@ jobs:
               tags: techindustry/elevateoff:${{ github.sha }}
               build-args: |
                 DATABASE_URL=${{ secrets.DATABASE_URL }}
+          -
+            name: Deploy to the vps
+            uses: appleboy/ssh-action@v1.2.1
+            with:
+              host: ${{ secrets.HOST }}
+              username: root
+              key: ${{ secrets.SSH_PRIVATE_KEY }}
+              script: |
+                docker pull techindustry/elevateoff:${{ github.sha }}
+                docker stop elevateoff
+                docker run --name elevateoff -d -p 3000:3000 techindustry/elevateoff:${{ github.sha }}
