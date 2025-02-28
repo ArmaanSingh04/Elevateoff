@@ -25,6 +25,8 @@ jobs:
               tags: techindustry/elevateoff:${{ github.sha }}
               build-args: |
                 DATABASE_URL=${{ secrets.DATABASE_URL }}
+                NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+                NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
           -
             name: Deploy to the vps
             uses: appleboy/ssh-action@v1.2.1

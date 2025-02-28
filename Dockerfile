@@ -2,6 +2,8 @@ FROM node:20-alpine
 
 WORKDIR /app
 ARG DATABASE_URL
+ARG NEXTAUTH_SECRET
+ARG NEXTAUTH_URL
 
 COPY package.json ./
 COPY pnpm-lock.yaml ./
@@ -10,8 +12,8 @@ RUN npm install -g pnpm
 RUN pnpm install
 
 ENV DATABASE_URL=${DATABASE_URL}
-ENV NEXTAUTH_SECRET="fuckaroundandfindout"
-ENV NEXTAUTH_URL="http://localhost:3000"
+ENV NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+ENV NEXTAUTH_URL=${NEXTAUTH_URL}
 
 COPY prisma ./
 RUN pnpm prisma migrate deploy
