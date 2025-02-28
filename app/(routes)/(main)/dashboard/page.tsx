@@ -38,7 +38,7 @@ export default async function Dashboard() {
     const projects = await handleGetAllProjects()
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full p-6">
-            {projects.map((project) => (
+            {projects.map((project:ProjectsType) => (
                 <Card className="bg-green-100 shadow-md rounded-lg" key={project.id}>
                     <CardHeader>
                     {project.contributable && <Badge className="bg-red-500 hover:bg-red-600 text-white text-left flex justify-start  w-fit">Contributable</Badge>}
