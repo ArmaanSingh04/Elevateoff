@@ -37,4 +37,5 @@ jobs:
               script: |
                 docker pull techindustry/elevateoff:${{ github.sha }}
                 docker stop elevateoff
+                docker rm elevateoff
                 docker run --name elevateoff -d -p 3000:3000 techindustry/elevateoff:${{ github.sha }}
