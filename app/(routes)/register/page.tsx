@@ -34,7 +34,7 @@ export default function Register() {
 
     return (
         <div className="flex w-full h-screen justify-center items-center">
-            <Card className="w-1/2 min-h-1/2 border bg-green-100  border-gray-500">
+            <Card className="sm:w-1/2 min-h-1/2 border bg-green-100  border-gray-500">
                 <CardHeader>
                     <CardTitle className="text-3xl text-center">🔥Register with email</CardTitle>
                 </CardHeader>

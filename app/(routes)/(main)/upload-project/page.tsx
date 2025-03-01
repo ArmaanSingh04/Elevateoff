@@ -80,9 +80,9 @@ const UploadProject = () => {
     }
     return (
         <div className='w-full flex justify-center items-center'>
-            <div className='max-w-1/2 flex w-2/3 gap-6 p-3 rounded'>
+            <div className='sm:max-w-1/2 flex w-full flex-col sm:flex-row justify-center items-center sm:w-2/3 gap-6 p-3 rounded'>
                 {/* Left Section - Form Fields */}
-                <div className='w-1/2 flex flex-col justify-center gap-4 p-3'>
+                <div className='sm:w-1/2 flex flex-col justify-center gap-4 p-3'>
                     <Label className='text-xl'>Enter project Name</Label>
                     <Input className='border border-gray-500' value={name} onChange={(e) => setName(e.target.value)} />
 
@@ -114,9 +114,9 @@ const UploadProject = () => {
                 </div>
 
                 {/* Right Section - Tags and Submit */}
-                <div className='w-1/2 flex flex-col gap-4 bg-green-50 rounded'>
+                <div className='sm:w-1/2 flex flex-col bg-green-50 rounded w-full'>
                     {/* Input Tags */}
-                    <Command className='bg-green-100 p-3'>
+                    <Command className='bg-green-100 p-3 w-full'>
                         <CommandInput className='border border-gray-500 text-lg p-2' placeholder="Search tags" />
                         <CommandList>
                             <CommandEmpty>No results found</CommandEmpty>
