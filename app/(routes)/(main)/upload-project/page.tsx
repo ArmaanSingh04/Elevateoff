@@ -46,6 +46,7 @@ const UploadProject = () => {
     const [description, setDescription] = useState<string>('')
     const [projectLink, setProjectLink] = useState<string>('')
     const [contributionLink, setContributionLink] = useState<string>('')
+    const [searchtagBox, setSearchtagBox] = useState<string>('')
 
     const pushtoSelectedTags = (tag: Tag) => {
         setSelectedTags((prev) => {
@@ -117,15 +118,26 @@ const UploadProject = () => {
                 <div className='sm:w-1/2 flex flex-col bg-green-50 rounded w-full'>
                     {/* Input Tags */}
                     <Command className='bg-green-100 p-3 w-full'>
-                        <CommandInput className='border border-gray-500 text-lg p-2' placeholder="Search tags" />
+                        <CommandInput className='border border-gray-500 text-lg p-2' placeholder="Search tags" onValueChange={(val) => setSearchtagBox(val)} />
                         <CommandList>
                             <CommandEmpty>No results found</CommandEmpty>
                             <CommandGroup heading="Suggestions">
-                                {tagsTable?.map((tag) => (
-                                    <CommandItem className='text-xl' onSelect={() => pushtoSelectedTags(tag)} key={tag.id}>
-                                        {tag.name}
-                                    </CommandItem>
-                                ))}
+                                {tagsTable
+                                    ?.filter((tag) =>
+                                        searchtagBox
+                                            ? tag.name.toLowerCase().includes(searchtagBox.toLowerCase())
+                                            : true
+                                    )
+                                    .slice(0, 5) // Show only top 5 results
+                                    .map((tag) => (
+                                        <CommandItem
+                                            className="text-xl"
+                                            onSelect={() => pushtoSelectedTags(tag)}
+                                            key={tag.id}
+                                        >
+                                            {tag.name}
+                                        </CommandItem>
+                                    ))}
                             </CommandGroup>
                             <CommandSeparator />
                         </CommandList>
